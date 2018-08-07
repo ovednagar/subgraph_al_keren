@@ -28,7 +28,7 @@ class MLCommunities:
         self._best_beta_df = None
         self._method = method
 
-    def forward_time_data(self, beta_matrix, best_pairs, labels, nodes, edges):
+    def forward_time_data(self, beta_matrix, best_pairs, nodes, edges, labels):
         self.labels = labels
         self._beta_pairs = best_pairs
         self._beta_matrix = beta_matrix
@@ -40,7 +40,6 @@ class MLCommunities:
     def run(self):
         if self._method == "RF":
             res_df = self._learn_RF(self._pca_df(self._best_beta_df, graph_data=True, min_nodes=10))
-            self.plot_learning_df(res_df)
         if self._method == "SVM":
             self._learn_SVM(self._pca_df(self._best_beta_df, graph_data=True, min_nodes=5))
 
